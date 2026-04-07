@@ -2,19 +2,18 @@ services:
   n8n:
     image: n8nio/n8n:latest
     restart: always
-    # Comente a linha abaixo se quiser desabilitar o acesso direto via porta 4000
     ports:
       - "4000:5678"
     networks:
       - default
       - proxy_network
     environment:
-      - N8N_HOST=n8n.lucasmatheus.tech
-      - N8N_PORT=5678
-      - N8N_PROTOCOL=https
+      - N8N_HOST=${DOMAIN_NAME}
+      - N8N_PORT=${N8N_PORT}
+      - N8N_PROTOCOL=${N8N_PROTOCOL}
       - NODE_ENV=production
-      - WEBHOOK_URL=https://n8n.lucasmatheus.tech/
-      - N8N_COMMUNITY_PACKAGES_ENABLED=true
+      - WEBHOOK_URL=${WEBHOOK_URL}
+      - N8N_COMMUNITY_PACKAGES_ENABLED=${N8N_COMMUNITY_PACKAGES_ENABLED}
     volumes:
       - n8n_data:/home/node/.n8n
 
